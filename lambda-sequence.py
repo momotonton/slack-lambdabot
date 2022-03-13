@@ -6,14 +6,14 @@ def lambda_handler(event, context):
     from datetime import datetime
 
     client = WebClient(token=environ['SLACK_TOKEN'])
-    lunch_list = ["とんかつ","牛かつ","お寿司","ラーメン","弁当"]
+    touban_list = ["オンジョ","チョンサン","ナムラ","スヒョク","グィナム"]
     today = datetime.now() 
-    start_day = datetime(2022,3,8)
+    start_day = datetime(2022,3,13)
 
     try:
         response = client.chat_postMessage(
             channel=environ['SLACK_CHANNEL'],
-            text=f"Today's lunch {(lunch_list[ (today-start_day).days % len(lunch_list) ])}!")
+            text=f"今日の当番は{(touban_list[ (today-start_day).days % len(touban_list) ])}さんです")
         print(response)
     except SlackApiError as e:
         # You will get a SlackApiError if "ok" is False
